@@ -1,5 +1,9 @@
 <h1><%= @post.title %></h1>
 
+<div class="post">
+  <%= @post.body %>
+</div>
+
 <div>
   <%= link_to "Edit post", edit_post_path if authenticated? %>
 </div>
