@@ -27,8 +27,13 @@
       <%= link_to "Home", root_path %>
     </div>
     <%= yield %>
-    <div style="padding-top: 50px;">
-      <%= link_to "New post", new_post_path %>
-    </div>
+    <% if authenticated? %>
+      <div style="padding-top: 50px;">
+        <%= link_to "New post", new_post_path %>
+      </div>
+      <div style="padding-top: 20px;">
+        <%= button_to "Log out", session_path, method: :delete %>
+      </div>
+    <% end %>
   </body>
 </html>
