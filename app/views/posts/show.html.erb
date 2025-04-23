@@ -1,5 +1,5 @@
 <h1><%= @post.title %></h1>
 
 <div>
-  <%= link_to "Edit post", edit_post_path %>
+  <%= link_to "Edit post", edit_post_path if authenticated? %>
 </div>
