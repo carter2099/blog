@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[ show edit update]
+
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def new
@@ -20,7 +21,22 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
+    def set_post
+      @post = Post.find(params[:id])
+    end
+
     def post_params
       params.expect(post: [ :title ])
     end
