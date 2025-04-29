@@ -208,7 +208,7 @@ form {
     margin: calc(var(--spacing-unit) * 2) 0;
 }
 
-form > div {
+form>div {
     margin-bottom: calc(var(--spacing-unit) * 2);
 }
 
@@ -245,7 +245,7 @@ input[type="password"]:focus {
 }
 
 /* Update button styles */
-button, 
+button,
 input[type="submit"] {
     background: var(--link-color);
     color: #fff;
@@ -259,7 +259,8 @@ input[type="submit"] {
     margin-top: var(--spacing-unit);
 }
 
-button:hover, input[type="submit"]:hover {
+button:hover,
+input[type="submit"]:hover {
     background: #7a6ef0;
 }
 
@@ -277,9 +278,7 @@ div[style*="padding-top: 50px"] {
 
 /* Admin controls */
 .admin-controls {
-    display: flex;
     gap: calc(var(--spacing-unit) * 0.5);
-    margin-top: calc(var(--spacing-unit) * 2);
     padding-top: calc(var(--spacing-unit) * 2);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

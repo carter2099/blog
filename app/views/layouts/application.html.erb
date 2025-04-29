@@ -36,7 +36,10 @@
     <% if authenticated? %>
       <footer>
         <div class="admin-controls">
-          <%= link_to "New post", new_post_path %>
+          <!-- Kinda hacky -->
+          <% if controller_name == 'posts' && action_name == 'index' %>
+            <%= link_to "New post", new_post_path %>
+          <% end %>
           <%= button_to "Log out", session_path, method: :delete %>
         </div>
       </footer>
