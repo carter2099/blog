@@ -1,6 +1,63 @@
+:root {
+    --width: 720px;
+    --font-main: 'Berkeley Mono', monospace;
+    --font-secondary: 'Roboto Mono', monospace;
+    --font-code: 'Berkeley Mono', monospace;
+    --background-color: #121212;
+    --heading-color: #FFFFFF;
+    --text-color: #FFFFFF;
+    --link-color: #8F85FF;
+    --visited-color: #B3B3B3;
+    --spacing-unit: 1rem;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 1rem;
+    font-family: var(--font-secondary);
+    margin: auto;
+    padding: var(--spacing-unit) var(--spacing-unit) calc(var(--spacing-unit) * 3);
+    max-width: var(--width);
+    text-align: left;
+    background-color: var(--background-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-main);
+    color: var(--heading-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: calc(var(--spacing-unit) * 2) 0 var(--spacing-unit);
+    letter-spacing: -0.02em;
+}
+
+a {
+    color: var(--link-color);
+    font-family: var(--font-main);
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    /* border-bottom: 3px solid #ff0000; */
+    transition: all 0.2s ease;
+    opacity: 0.9;
+}
+
+a:hover {
+    /* background-color: var(--main-color); */
+    /* color: white; */
+    text-decoration: none;
+    opacity: 1;
+    color: #fff;
 }
 
 nav {
@@ -27,8 +84,202 @@ main {
 }
 
 .post {
+    margin: calc(var(--spacing-unit) * 2) 0;
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+/* Style the Trix content within posts */
+.post .trix-content {
+    background: transparent;
+    padding: 0;
+    width: 100%;
+}
+
+.post .trix-content h1 {
+    font-size: 1.8em;
+    margin: 1.5em 0 0.8em;
+    color: var(--heading-color);
+}
+
+.post .trix-content p {
+    margin: 1.2em 0;
+}
+
+.post .trix-content blockquote {
+    margin: 1.5em 0;
+    padding: 0.8em 1.2em;
+    border-left: 3px solid var(--link-color);
+    background: rgba(255, 255, 255, 0.03);
+    font-style: italic;
+    color: #B3B3B3;
+}
+
+.post .trix-content pre {
+    margin: 1.5em 0;
+    padding: 1.2em;
+    background: #1A1A1A;
+    border-radius: 4px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+    overflow-x: auto;
+}
+
+.post .trix-content ul,
+.post .trix-content ol {
+    margin: 1em 0;
+    padding-left: 1.5em;
+}
+
+.post .trix-content li {
+    margin: 0.5em 0;
+}
+
+.post .trix-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1.5em 0;
+    border-radius: 4px;
+}
+
+.post .trix-content a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(143, 133, 255, 0.3);
+    transition: all 0.2s ease;
+}
+
+.post .trix-content a:hover {
+    border-bottom-color: var(--link-color);
+    color: #fff;
+}
+
+/* Style code blocks and inline code */
+.post .trix-content code {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: var(--font-code);
+    font-size: 0.9em;
+}
+
+.post .trix-content pre code {
+    background: transparent;
+    padding: 0;
+    font-size: 1em;
+}
+
+/* Style attachments */
+.post .trix-content .attachment {
+    margin: 1.5em 0;
+}
+
+.post .trix-content .attachment--preview {
+    padding: 1em;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+}
+
+.post .trix-content .attachment__caption {
+    font-size: 0.9em;
+    color: #B3B3B3;
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+/* Add a subtle divider between posts in the list */
+#posts div {
+    padding: calc(var(--spacing-unit) * 1.2) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#posts div:last-child {
+    border-bottom: none;
+}
+
+#posts a {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    display: block;
+}
+
+/* Form styles */
+form {
+    margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+form > div {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+label {
+    display: block;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    color: #B3B3B3;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.8rem;
+    font-family: var(--font-secondary);
+    border-radius: 4px;
+    width: 100%;
+    max-width: 100%;
+    background: #1E1E1E;
+    border: 1px solid #333333;
+    font-size: 1.1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--link-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Update button styles */
+button, 
+input[type="submit"] {
+    background: var(--link-color);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-family: var(--font-main);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    margin-top: var(--spacing-unit);
+}
+
+button:hover, input[type="submit"]:hover {
+    background: #7a6ef0;
+}
+
+div[style*="padding-bottom: 25px"] {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    padding-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+div[style*="padding-top: 50px"] {
+    margin-top: calc(var(--spacing-unit) * 3);
+    padding-top: calc(var(--spacing-unit) * 2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Admin controls */
+.admin-controls {
     display: flex;
-    gap: 1rem;
-    flex-direction: row;
-    margin-bottom: 25px;
+    gap: calc(var(--spacing-unit) * 0.5);
+    margin-top: calc(var(--spacing-unit) * 2);
+    padding-top: calc(var(--spacing-unit) * 2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }

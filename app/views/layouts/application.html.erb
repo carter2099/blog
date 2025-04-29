@@ -23,17 +23,23 @@
   </head>
 
   <body>
-    <div style="padding-bottom: 25px;">
-      <%= link_to "Home", root_path %>
-    </div>
-    <%= yield %>
+    <header>
+      <nav>
+        <%= link_to "Home", root_path %>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
     <% if authenticated? %>
-      <div style="padding-top: 50px;">
-        <%= link_to "New post", new_post_path %>
-      </div>
-      <div style="padding-top: 20px;">
-        <%= button_to "Log out", session_path, method: :delete %>
-      </div>
+      <footer>
+        <div class="admin-controls">
+          <%= link_to "New post", new_post_path %>
+          <%= button_to "Log out", session_path, method: :delete %>
+        </div>
+      </footer>
     <% end %>
   </body>
 </html>
