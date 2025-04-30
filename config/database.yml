@@ -34,10 +34,11 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   primary:
+    <<: *pg
     database: <%= ENV['POSTGRES_DB'] %>
     username: <%= ENV['POSTGRES_USER'] %>
     password: <%= ENV['POSTGRES_PASSWORD'] %>
-    host: host.docker.internal
+    host: 172.17.0.1
     port: <%= ENV['POSTGRES_PORT'] %>
   cache:
     <<: *default
