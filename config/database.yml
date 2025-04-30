@@ -4,14 +4,23 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
+pg: &pg
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
 development:
-  <<: *default
-  database: storage/development.sqlite3
+  <<: *pg
+  database: blog_development
+  username: bloguser
+  password: changeit
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,8 +34,11 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   primary:
-    <<: *default
-    database: storage/production.sqlite3
+    database: <%= ENV['POSTGRES_DB'] %>
+    username: <%= ENV['POSTGRES_USER'] %>
+    password: <%= ENV['POSTGRES_PASSWORD'] %>
+    host: host.docker.internal
+    port: <%= ENV['POSTGRES_PORT'] %>
   cache:
     <<: *default
     database: storage/production_cache.sqlite3
@@ -39,3 +51,48 @@ production:
     <<: *default
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
+
+
+
+
+
+
+
+
+### Defaults
+
+#default: &default
+#  adapter: sqlite3
+#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#  timeout: 5000
+#
+#development:
+#  <<: *default
+#  database: storage/development.sqlite3
+#
+## Warning: The database defined as "test" will be erased and
+## re-generated from your development database when you run "rake".
+## Do not set this db to the same as development or production.
+#test:
+#  <<: *default
+#  database: storage/test.sqlite3
+#
+#
+## Store production database in the storage/ directory, which by default
+## is mounted as a persistent Docker volume in config/deploy.yml.
+#production:
+#  primary:
+#    <<: *default
+#    database: storage/production.sqlite3
+#  cache:
+#    <<: *default
+#    database: storage/production_cache.sqlite3
+#    migrations_paths: db/cache_migrate
+#  queue:
+#    <<: *default
+#    database: storage/production_queue.sqlite3
+#    migrations_paths: db/queue_migrate
+#  cable:
+#    <<: *default
+#    database: storage/production_cable.sqlite3
+#    migrations_paths: db/cable_migrate
