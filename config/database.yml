@@ -16,11 +16,14 @@ pg: &pg
   pool: 5
 
 development:
-  <<: *pg
-  database: blog_development
-  username: bloguser
-  password: changeit
-  host: localhost
+  <<: *default
+  database: storage/development.sqlite3
+#development:
+#  <<: *pg
+#  database: blog_development
+#  username: bloguser
+#  password: changeit
+#  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
