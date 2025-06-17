@@ -24,7 +24,7 @@
 
 nav {
     padding-bottom: 1rem;
-    border-bottom: 1px solid;
+    border-bottom: 2px dotted;
 }
 
 nav a {
@@ -43,4 +43,13 @@ nav a:hover {
 
 .content {
     padding-top: 1rem;
+}
+
+footer {
+    margin-top: 50px;
+    border-top: 2px dotted;
+}
+
+.login input {
+    margin: 0.2rem 0;
 }
