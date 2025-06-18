@@ -9,9 +9,10 @@
   </p>
 <% end %>
 
-<% if flash[:notice] %>
-  <p style="color: green;"><%= flash[:notice] %></p>
-<% end %>
-<% if flash[:alert] %>
-  <p style="color: red;"><%= flash[:alert] %></p>
+<% if flash.notice %>
+  <p style="color: green;"><%= flash.notice %></p>
+<% elsif flash.alert %>
+  <p style="color: red;"><%= flash.alert %></p>
+<% else %>
+  <br />
 <% end %>

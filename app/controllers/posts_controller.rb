@@ -11,11 +11,10 @@ class PostsController < ApplicationController
   end
 
   def new
+    @hide_upload_footer = true
   end
 
   def create
-    flash[:notice] = nil
-    flash[:alert] = nil
     if params[:markdown_file].present?
       file = params[:markdown_file]
       logger.info "Received file #{file.original_filename}"
@@ -27,15 +26,16 @@ class PostsController < ApplicationController
       file_path = posts_dir.join(new_filename)
       File.write(file_path, file.read)
 
-      flash[:notice] = "#{file.original_filename} uploaded successfully"
       redirect_to "/posts/#{new_filename}"
     else
-      flash[:alert] = "Please select a file"
+      flash.now.alert = "Please select a file"
+      @hide_upload_footer = true
       render :new, status: :bad_request
     end
 
   rescue StandardError => e
-    flash[:alert] = "Error uploading file: #{e}"
+    flash.now.alert = "Error uploading file: #{e}"
+    @hide_upload_footer = true
     render :new, status: :internal_server_error
   end
 end

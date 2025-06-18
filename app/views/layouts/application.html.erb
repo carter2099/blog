@@ -36,7 +36,8 @@
     <% if authenticated? %>
       <footer>
         <p>
-          <%= button_to "Log out", session_path, method: :delete if authenticated? %>
+          <%= button_to "Log out", session_path, method: :delete %>
+          <%= button_to "Upload", "/posts/new", method: :get unless @hide_upload_footer %>
         </p>
       </footer>
     <% end %>

@@ -46,10 +46,15 @@ nav a:hover {
 }
 
 footer {
-    margin-top: 50px;
+    margin-top: 40px;
     border-top: 2px dotted;
 }
 
 .login input {
     margin: 0.2rem 0;
+}
+
+footer form {
+    display: inline-block;
+    margin-right: 0.5rem;
 }
