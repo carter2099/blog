@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "/home", to: "home#index"
 
   get "/posts", to: "posts#index"
-  get "/posts/show", to: "posts#show"
   get "/posts/new", to: "posts#new"
   post "/posts/create", to: "posts#create"
+  get "/posts/:name", to: "posts#show"
 end
