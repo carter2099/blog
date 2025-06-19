@@ -2,7 +2,7 @@
 
 <%= form_with url: "/posts/create", local: true, multipart: true do |f| %>
   <p>
-    <%= file_field_tag :markdown_file, accept: '.md' %>
+    <%= file_field_tag :markdown_file, accept: ".md" %>
   </p>
   <p>
     <%= submit_tag "Upload" %>
