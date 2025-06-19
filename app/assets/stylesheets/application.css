@@ -55,6 +55,11 @@ footer {
     margin: 0.2rem 0;
 }
 
+/* Just the email and password inputs */
+.login-input {
+    width: 300px;
+}
+
 footer form {
     display: inline-block;
     margin-right: 0.5rem;
