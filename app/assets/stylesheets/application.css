@@ -46,13 +46,31 @@ nav a:hover {
     padding-top: 1rem;
 }
 
+form * {
+    display: block;
+}
+
+form  label {
+    font-weight: bold;
+    padding-top: 0.5rem;
+    margin-bottom: 0.1rem;
+}
+
+form input {
+    margin-bottom: 0.5rem;
+}
+
 footer {
     margin-top: 40px;
     border-top: 2px dotted;
 }
 
-.login input {
-    margin: 0.2rem 0;
+#post_title {
+    width: 300px;
+}
+
+.post-upload-button {
+    margin-top: 2rem;
 }
 
 /* Just the email and password inputs */
