@@ -46,6 +46,15 @@ nav a:hover {
     padding-top: 1rem;
 }
 
+.posts-index * {
+    display: block;
+}
+
+.posts-index a {
+    color: var(--link-color);
+    padding-bottom: 1rem;
+}
+
 form * {
     display: block;
 }
@@ -60,11 +69,6 @@ form input {
     margin-bottom: 0.5rem;
 }
 
-footer {
-    margin-top: 40px;
-    border-top: 2px dotted;
-}
-
 #post_title {
     width: 300px;
 }
@@ -76,6 +80,11 @@ footer {
 /* Just the email and password inputs */
 .login-input {
     width: 300px;
+}
+
+footer {
+    margin-top: 40px;
+    border-top: 2px dotted;
 }
 
 footer form {

@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
 
   def index
+    @posts = Post.all
   end
 
   def show
