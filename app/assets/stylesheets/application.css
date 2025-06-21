@@ -10,17 +10,19 @@
  */
 
 :root {
-    --link-color: #0000EE
+    --link-color: #0000EE;
+    --code-bg-color: #DFDFDF;
 }
 
 .container {
     max-width: 700px;
     margin: 0 auto;
     padding: 0 1rem;
+    line-height: 1.5;
 }
 
 .header {
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 nav {
@@ -43,16 +45,30 @@ nav a:hover {
 }
 
 .content {
-    padding-top: 1rem;
+    /*
+    padding-top: 0.2rem;
+    */
 }
 
 .posts-index * {
     display: block;
+    width: fit-content;
 }
 
 .posts-index a {
     color: var(--link-color);
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.post-created-date {
+    opacity: 0.7;
+    font-family: monospace;
+}
+
+code {
+    display: block;
+    padding: 0.5rem;
+    background-color: var(--code-bg-color);
 }
 
 form * {

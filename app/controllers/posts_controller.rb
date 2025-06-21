@@ -1,3 +1,5 @@
+require "redcarpet"
+
 class PostsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
 
@@ -7,6 +9,16 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    file = File.new(@post.path)
+    markdown = Redcarpet::Markdown.new(
+      Redcarpet::Render::HTML.new(
+        hard_wrap: true,
+        filter_html: true
+      ),
+      fenced_code_blocks: true
+    )
+    @content = markdown.render(file.read).html_safe
+    puts @content
   end
 
   def new

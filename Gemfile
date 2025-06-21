@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "rubocop-erb", "~> 0.6.0"
+
+gem "redcarpet", "~> 3.6"
