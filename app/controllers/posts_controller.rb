@@ -40,14 +40,15 @@ class PostsController < ApplicationController
       FileUtils.mkdir_p(posts_dir)
       new_filename = file.original_filename.gsub(/ /, "-")
       file_path = posts_dir.join(new_filename)
-      File.write(file_path, file.read)
+      File.binwrite(file_path, file.read)
 
       @post.path = file_path
       if @post.save
         logger.info("Succesfully saved post: #{@post.inspect}")
         redirect_to @post
       else
-        logger.error("Error saving post: #{@post.errors}")
+        logger.error("Error saving post: #{@post.errors.full_messages}")
+        flash.now.alert = "Error saving post: #{@post.errors.full_messages.join(',')}"
         render :new, status: :unprocessable_entity
       end
 
@@ -62,8 +63,8 @@ class PostsController < ApplicationController
     render :new, status: :bad_request
 
   rescue StandardError => e
-    logger.error("Error creating post: #{e.message}")
-    flash.now.alert = "Error creating post: #{e}"
+    logger.error("Error during post processing: #{e.message}")
+    flash.now.alert = "Error during post processing: #{e}"
     @hide_upload_footer = true
     render :new, status: :internal_server_error
   end
