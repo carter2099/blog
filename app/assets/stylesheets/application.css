@@ -105,6 +105,7 @@ footer {
     border-top: 2px dotted;
 }
 
+.post-show-btns form,
 footer form {
     display: inline-block;
     margin-right: 0.5rem;

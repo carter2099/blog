@@ -2,13 +2,13 @@ require "redcarpet"
 
 class PostsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
+  before_action :set_post, only: %i[ show destroy ]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
     file = File.new(@post.path)
     markdown = Redcarpet::Markdown.new(
       Redcarpet::Render::HTML.new(
@@ -18,7 +18,6 @@ class PostsController < ApplicationController
       fenced_code_blocks: true
     )
     @content = markdown.render(file.read).html_safe
-    puts @content
   end
 
   def new
@@ -68,4 +67,14 @@ class PostsController < ApplicationController
     @hide_upload_footer = true
     render :new, status: :internal_server_error
   end
+
+  def destroy
+    @post.destroy
+    redirect_to posts_path
+  end
+
+  private
+    def set_post
+      @post = Post.find(params[:id])
+    end
 end

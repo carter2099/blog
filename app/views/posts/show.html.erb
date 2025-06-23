@@ -1,3 +1,8 @@
+<div class="post-show-btns">
+  <%= button_to "Edit", post_path if authenticated? %>
+  <%= button_to "Delete", post_path, method: :delete,
+    data: { turbo_confirm: "Delete post?" } if authenticated? %>
+</div>
 <p class="post-created-date"><%= @post.created_at.strftime("%a %b %e %Y") %></p>
 <p>
   <%= @content %>
