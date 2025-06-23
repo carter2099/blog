@@ -72,6 +72,9 @@ class PostsController < ApplicationController
       file = post_params[:file]
       post_update_args[:path] = process_file(file)
     end
+    if post_params[:images].present?
+      process_images(post_params[:images])
+    end
     if @post.update(post_update_args)
       logger.info("Succesfully updated post: #{@post.inspect}")
       redirect_to @post
@@ -113,7 +116,23 @@ class PostsController < ApplicationController
       FileUtils.mkdir_p(posts_dir)
       new_filename = file.original_filename.gsub(/ /, "-")
       file_path = posts_dir.join(new_filename)
+      File.delete(file_path) if File.exist?(file_path)
       File.binwrite(file_path, file.read)
       file_path
+    end
+
+    def process_images(images)
+      images.reject!(&:blank?)
+      return unless images.size
+
+      logger.info("Received #{images.size} image(s)")
+      images_dir = Rails.root.join("app", "assets", "images")
+      images.each do |image|
+        image_path = images_dir.join(image.original_filename)
+        File.delete(image_path) if File.exist?(image_path)
+        File.binwrite(image_path, image.read)
+      end
+    rescue StandardError => e
+      logger.error("Error processing images: #{e}")
     end
 end

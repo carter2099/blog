@@ -6,6 +6,10 @@
     <%= form.file_field :file, accept: ".md" %>
   </div>
   <div>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, accept: "image/*" %>
+  </div>
+  <div>
     <%= form.submit value: "Submit", class: "post-submit-button" %>
   </div>
 <% end %>
