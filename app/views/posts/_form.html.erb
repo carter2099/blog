@@ -1,0 +1,17 @@
+<%= form_with model: post do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title, required: true %>
+  <div>
+    <%= form.label :file %>
+    <%= form.file_field :file, accept: ".md" %>
+  </div>
+  <div>
+    <%= form.submit value: "Submit", class: "post-submit-button" %>
+  </div>
+<% end %>
+
+<% if flash.notice %>
+  <p style="color: green;"><%= flash.notice %></p>
+<% elsif flash.alert %>
+  <p style="color: red;"><%= flash.alert %></p>
+<% end %>

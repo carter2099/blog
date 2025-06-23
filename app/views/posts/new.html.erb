@@ -1,19 +1,4 @@
-<h2>Upload</h2>
+<h2>New Post</h2>
+<%= link_to "Cancel", posts_path, class: "cancel" %>
 
-<%= form_with model: @post do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title, required: true %>
-  <div>
-    <%= form.label :file %>
-    <%= form.file_field :file, accept: ".md" %>
-  </div>
-  <div>
-    <%= form.submit value: "Upload", class: "post-upload-button" %>
-  </div>
-<% end %>
-
-<% if flash.notice %>
-  <p style="color: green;"><%= flash.notice %></p>
-<% elsif flash.alert %>
-  <p style="color: red;"><%= flash.alert %></p>
-<% end %>
+<%= render "form", post: @post %>

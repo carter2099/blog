@@ -1,5 +1,5 @@
-<div class="post-show-btns">
-  <%= button_to "Edit", post_path if authenticated? %>
+<div class="btns">
+  <%= button_to "Edit", edit_post_path, post: @post, method: :get if authenticated? %>
   <%= button_to "Delete", post_path, method: :delete,
     data: { turbo_confirm: "Delete post?" } if authenticated? %>
 </div>

@@ -2,7 +2,7 @@ require "redcarpet"
 
 class PostsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
-  before_action :set_post, only: %i[ show destroy ]
+  before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
     @posts = Post.all
@@ -27,21 +27,14 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new
-    post_params = params.expect(post: {})
-    post_params.expect(:title)
+    post_params = validate_params
+
     @post.title = post_params[:title]
 
     if post_params[:file].present?
       file = post_params[:file]
-      logger.info("Received file #{file.original_filename}")
 
-      posts_dir = Rails.root.join("app", "posts")
-      FileUtils.mkdir_p(posts_dir)
-      new_filename = file.original_filename.gsub(/ /, "-")
-      file_path = posts_dir.join(new_filename)
-      File.binwrite(file_path, file.read)
-
-      @post.path = file_path
+      @post.path = process_file(file)
       if @post.save
         logger.info("Succesfully saved post: #{@post.inspect}")
         redirect_to @post
@@ -62,11 +55,42 @@ class PostsController < ApplicationController
     render :new, status: :bad_request
 
   rescue StandardError => e
-    logger.error("Error during post processing: #{e.message}")
-    flash.now.alert = "Error during post processing: #{e}"
+    logger.error("Error processing post: #{e.message}")
+    flash.now.alert = "Error processing post: #{e}"
     @hide_upload_footer = true
     render :new, status: :internal_server_error
   end
+
+  def edit
+  end
+
+  def update
+    post_params = validate_params
+
+    post_update_args = { title: post_params [:title] }
+    if post_params[:file].present?
+      file = post_params[:file]
+      post_update_args[:path] = process_file(file)
+    end
+    if @post.update(post_update_args)
+      logger.info("Succesfully updated post: #{@post.inspect}")
+      redirect_to @post
+    else
+      logger.error("Error updating post: #{@post.errors.full_messages}")
+      flash.now.alert = "Error updating post: #{@post.errors.full_messages.join(',')}"
+      render :edit, status: :unprocessable_entity
+    end
+  rescue ActionController::ParameterMissing => ve
+    logger.warn(ve.message)
+    render :new, status: :bad_request
+
+  rescue StandardError => e
+    logger.error("Error processing post: #{e.message}")
+    flash.now.alert = "Error processing post: #{e}"
+    @hide_upload_footer = true
+    render :new, status: :internal_server_error
+  end
+
 
   def destroy
     @post.destroy
@@ -74,7 +98,22 @@ class PostsController < ApplicationController
   end
 
   private
+    def validate_params
+      post_params = params.expect(post: {})
+      post_params.expect(:title)
+      post_params
+    end
     def set_post
       @post = Post.find(params[:id])
+    end
+
+    def process_file(file)
+      logger.info("Received file #{file.original_filename}")
+      posts_dir = Rails.root.join("app", "posts")
+      FileUtils.mkdir_p(posts_dir)
+      new_filename = file.original_filename.gsub(/ /, "-")
+      file_path = posts_dir.join(new_filename)
+      File.binwrite(file_path, file.read)
+      file_path
     end
 end

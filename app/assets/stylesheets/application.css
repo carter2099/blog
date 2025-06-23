@@ -90,9 +90,15 @@ form input {
     width: 300px;
 }
 
-.post-upload-button {
+.post-submit-button {
     margin-top: 2rem;
     width: fit-content;
+}
+
+.cancel {
+    color: var(--link-color);
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 /* Just the email and password inputs */
@@ -105,7 +111,7 @@ footer {
     border-top: 2px dotted;
 }
 
-.post-show-btns form,
+.btns form,
 footer form {
     display: inline-block;
     margin-right: 0.5rem;
