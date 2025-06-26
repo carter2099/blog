@@ -96,6 +96,11 @@ class PostsController < ApplicationController
 
 
   def destroy
+    unless Post.where(path: @post.path).size > 1
+      deleted_dir = Rails.root.join("app", "posts", "deleted")
+      FileUtils.mkdir_p(deleted_dir)
+      FileUtils.mv(@post.path, deleted_dir.join(File.basename(@post.path)))
+    end
     @post.destroy
     redirect_to posts_path
   end
