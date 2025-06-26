@@ -4,6 +4,6 @@
     data: { turbo_confirm: "Delete post?" } if authenticated? %>
 </div>
 <p class="post-created-date"><%= @post.created_at.strftime("%a %b %e %Y") %></p>
-<p>
+<div class="post-content">
   <%= @content %>
-</p>
+</div>

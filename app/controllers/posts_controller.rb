@@ -106,6 +106,7 @@ class PostsController < ApplicationController
       post_params.expect(:title)
       post_params
     end
+
     def set_post
       @post = Post.find(params[:id])
     end
@@ -116,8 +117,16 @@ class PostsController < ApplicationController
       FileUtils.mkdir_p(posts_dir)
       new_filename = file.original_filename.gsub(/ /, "-")
       file_path = posts_dir.join(new_filename)
+
+      # -> replace obsidian images with standard md
+      # Ok because my posts won't ever be that big
+      # If you're seeing this and thinking, wow let me try that:
+      # no
+      content = file.read
+      content.gsub!(/!\[\[(.+)\]\]/, '![\1](/images/\1)')
+
       File.delete(file_path) if File.exist?(file_path)
-      File.binwrite(file_path, file.read)
+      File.binwrite(file_path, content)
       file_path
     end
 
@@ -126,7 +135,8 @@ class PostsController < ApplicationController
       return unless images.size
 
       logger.info("Received #{images.size} image(s)")
-      images_dir = Rails.root.join("app", "assets", "images")
+      images_dir = Rails.root.join("public", "images")
+      FileUtils.mkdir_p(images_dir)
       images.each do |image|
         image_path = images_dir.join(image.original_filename)
         File.delete(image_path) if File.exist?(image_path)

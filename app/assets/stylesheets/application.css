@@ -95,6 +95,11 @@ form input {
     width: fit-content;
 }
 
+.post-content img {
+    object-fit: contain;
+    max-width: 100%;
+}
+
 .cancel {
     color: var(--link-color);
     margin-bottom: 0.5rem;
