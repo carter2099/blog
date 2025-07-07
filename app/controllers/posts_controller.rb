@@ -128,7 +128,7 @@ class PostsController < ApplicationController
       # If you're seeing this and thinking, wow let me try that:
       # no
       content = file.read
-      content.gsub!(/!\[\[(.+)\]\]/, '![\1](/images/\1)')
+      content.gsub!(/!\[\[(.+)\]\]/, '![\1](/assets/\1)')
 
       File.delete(file_path) if File.exist?(file_path)
       File.binwrite(file_path, content)
@@ -140,7 +140,7 @@ class PostsController < ApplicationController
       return unless images.size
 
       logger.info("Received #{images.size} image(s)")
-      images_dir = Rails.root.join("public", "images")
+      images_dir = Rails.root.join("app", "assets", "images")
       FileUtils.mkdir_p(images_dir)
       images.each do |image|
         image_path = images_dir.join(image.original_filename)
