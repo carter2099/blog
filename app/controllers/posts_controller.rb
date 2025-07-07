@@ -147,6 +147,7 @@ class PostsController < ApplicationController
         File.delete(image_path) if File.exist?(image_path)
         File.binwrite(image_path, image.read)
       end
+      PostsHelper.load_post_images
     rescue StandardError => e
       logger.error("Error processing images: #{e}")
     end
