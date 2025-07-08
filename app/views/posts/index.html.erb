@@ -1,5 +1,5 @@
 <div class="posts-index">
-  <% @posts.group_by { _1.created_at.year }.each_pair do |year, posts| %>
+  <% @posts.sort_by { _1.created_at }.reverse.group_by { _1.created_at.year }.each_pair do |year, posts| %>
     <h2><%= year %></h2>
     <% posts.each do |post| %>
       <%= link_to post.title, post %>

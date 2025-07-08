@@ -33,13 +33,12 @@
     <div class="content">
       <%= yield %>
     </div>
-    <% if authenticated? %>
-      <footer>
-        <p>
+    <footer>
+      <p>carter2099@pm.me</p>
+      <% if authenticated? %>
           <%= button_to "Log out", session_path, method: :delete %>
           <%= button_to "Upload", "/posts/new", method: :get unless @hide_upload_footer %>
-        </p>
-      </footer>
-    <% end %>
+      <% end %>
+    </footer>
   </body>
 </html>
