@@ -44,6 +44,10 @@ class PostsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
 
+    if post_params[:images].present?
+      process_images(post_params[:images])
+    end
+
     else
       flash.now.alert = "Please provide a file"
       @hide_upload_footer = true
@@ -72,9 +76,11 @@ class PostsController < ApplicationController
       file = post_params[:file]
       post_update_args[:path] = process_file(file)
     end
+
     if post_params[:images].present?
       process_images(post_params[:images])
     end
+
     if @post.update(post_update_args)
       logger.info("Succesfully updated post: #{@post.inspect}")
       redirect_to @post
