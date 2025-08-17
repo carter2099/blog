@@ -125,6 +125,17 @@ class PostsController < ApplicationController
           item.link = "https://blog.carter2099.com/posts/#{post.id}"
           item.title = post.title
           item.updated = post.created_at.to_time.utc
+          markdown = Redcarpet::Markdown.new(
+            Redcarpet::Render::HTML.new(
+              hard_wrap: true,
+              filter_html: true
+            ),
+            fenced_code_blocks: true
+          )
+          file = File.new(post.path)
+          content = markdown.render(file.read).html_safe
+          item.content.type = "html"
+          item.content.content = content
         end
       end
     end
