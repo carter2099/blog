@@ -1,4 +1,5 @@
 require "redcarpet"
+require "rss"
 
 class PostsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
@@ -109,6 +110,25 @@ class PostsController < ApplicationController
     end
     @post.destroy
     redirect_to posts_path
+  end
+
+  def rss
+    posts = Post.last(20)
+    rss = RSS::Maker.make("atom") do |maker|
+      maker.channel.author = "carter2099"
+      maker.channel.updated = Time.now.utc
+      maker.channel.about = "https://blog.carter2099.com/"
+      maker.channel.title = "blog.carter2099.com"
+
+      posts.each do |post|
+        maker.items.new_item do |item|
+          item.link = "https://blog.carter2099.com/posts/#{post.id}"
+          item.title = post.title
+          item.updated = post.created_at.to_time.utc
+        end
+      end
+    end
+    render body: rss.to_s, content_type: "application/atom+xml; charset=utf-8"
   end
 
   private

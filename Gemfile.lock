@@ -261,6 +261,8 @@ GEM
     reline (0.6.1)
       io-console (~> 0.5)
     rexml (3.4.1)
+    rss (0.3.1)
+      rexml
     rubocop (1.76.1)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
@@ -390,6 +392,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.2)
   redcarpet (~> 3.6)
+  rss (~> 0.3.1)
   rubocop-erb (~> 0.6.0)
   rubocop-rails-omakase
   selenium-webdriver

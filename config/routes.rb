@@ -26,4 +26,6 @@ Rails.application.routes.draw do
   patch "/posts/:id", to: "posts#update"
   put "/posts/:id", to: "posts#update"
   delete "/posts/:id", to: "posts#destroy"
+
+  get "rss", to: "posts#rss", defaults: { format: :rss }
 end
