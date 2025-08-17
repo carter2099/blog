@@ -34,7 +34,7 @@
       <%= yield %>
     </div>
     <footer>
-      <p>carter2099@pm.me</p>
+      <p>carter2099@pm.me | <%= link_to "Subscribe via RSS", rss_path %></p>
       <% if authenticated? %>
           <%= button_to "Log out", session_path, method: :delete %>
           <%= button_to "Upload", "/posts/new", method: :get unless @hide_upload_footer %>
