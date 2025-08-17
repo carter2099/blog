@@ -2,7 +2,7 @@ require "redcarpet"
 require "rss"
 
 class PostsController < ApplicationController
-  allow_unauthenticated_access only: %i[ index show ]
+  allow_unauthenticated_access only: %i[ index show rss ]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
