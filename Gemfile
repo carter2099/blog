@@ -66,4 +66,4 @@ gem "rubocop-erb", "~> 0.7.0"
 
 gem "redcarpet", "~> 3.6"
 
-gem "rss", "~> 0.3.1"
+gem "rss", "~> 0.3.2"
