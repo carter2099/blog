@@ -115,7 +115,6 @@ class PostsController < ApplicationController
   def rss
     posts = Post.order(created_at: :desc).limit(20)
     rss = RSS::Maker.make("atom") do |maker|
-      maker.items.do_sort = false
       maker.channel.author = "carter2099"
       maker.channel.updated = Time.now.utc
       maker.channel.about = "https://blog.carter2099.com/"
