@@ -27,5 +27,7 @@ Rails.application.routes.draw do
   put "/posts/:id", to: "posts#update"
   delete "/posts/:id", to: "posts#destroy"
 
+#  get "/books", to: "books#index", as: :posts
+
   get "rss", to: "posts#rss", defaults: { format: :rss }
 end
