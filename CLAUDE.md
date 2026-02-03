@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Rails 8 personal blog application with file-based markdown content storage. Posts are stored as markdown files on disk while metadata lives in SQLite. The app uses Rails 8's built-in authentication system and is deployed via Kamal with Docker.
+This is a Rails 8 personal blog application with file-based markdown content storage. Posts are stored as markdown files on disk while metadata lives in SQLite. The app uses Rails 8's built-in authentication system and is deployed via Docker Compose to a homelab.
 
 ## Common Commands
 
@@ -24,6 +24,7 @@ bin/rails test test/models            # Run model tests
 bin/rails test test/controllers       # Run controller tests
 bin/rails test:system                 # Run system tests
 bin/rails test <path/to/test.rb>      # Run specific test file
+bin/rails test <path/to/test.rb>:<line> # Run specific test method
 ```
 
 ### Code Quality
@@ -35,10 +36,10 @@ bin/importmap audit          # Check JavaScript dependency vulnerabilities
 
 ### Deployment
 ```bash
-kamal setup                  # Initial server setup
-kamal deploy                 # Deploy to production
-kamal app logs               # View production logs
-kamal app exec -i bash       # SSH into production container
+docker compose build         # Build the Docker image
+docker compose up -d         # Start containers in background
+docker compose logs -f       # View container logs
+docker compose exec app bin/rails console  # Rails console in container
 ```
 
 ## Architecture
@@ -109,19 +110,17 @@ Redcarpet configured with:
 - CI runs: importmap audit, rubocop, and full test suite
 
 ## Deployment
-- Dockerized via Kamal
+- Deployed via Docker Compose to homelab
 - Ruby 3.4.3 slim base image
 - Multi-stage build with Bootsnap and asset precompilation
 - Runs on port 3099 as non-root user (rails:rails)
-- Persistent volume: `blog_storage:/rails/storage`
-- SSL via Let's Encrypt
 - Solid Queue supervisor runs in Puma process (not separate container)
 
 ## Technology Stack
 - **Backend**: Rails 8.1.1, Ruby 3.4.3, SQLite3
 - **Frontend**: Propshaft, Importmap, Turbo, Stimulus
 - **Content**: Redcarpet (markdown), RSS (feeds)
-- **Production**: Kamal, Solid Cache, Solid Queue, Solid Cable, Thruster
+- **Production**: Docker Compose, Solid Cache, Solid Queue, Solid Cable, Thruster
 - **Testing**: Minitest, Capybara, Selenium
 
 ## Important Notes
