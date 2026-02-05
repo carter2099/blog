@@ -12,6 +12,9 @@ services:
         source: ./app/posts
         target: /rails/app/posts
       - type: bind
+        source: ./app/reviews
+        target: /rails/app/reviews
+      - type: bind
         source: ./app/assets/images
         target: /rails/app/assets/images
       - type: bind
