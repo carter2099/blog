@@ -1,0 +1,28 @@
+<%= form_with model: review do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title, required: true %>
+
+  <%= form.label :review_type, "Type" %>
+  <%= form.select :review_type, options_for_select(Review::REVIEW_TYPES, review.review_type), required: true %>
+
+  <%= form.label :rating %>
+  <%= form.number_field :rating, value: review.rating, min: 0, max: 5, step: 0.1, required: true %>
+
+  <div>
+    <%= form.label :file %>
+    <%= form.file_field :file, accept: ".md" %>
+  </div>
+  <div>
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true, accept: "image/*" %>
+  </div>
+  <div>
+    <%= form.submit value: "Submit", class: "review-submit-button" %>
+  </div>
+<% end %>
+
+<% if flash.notice %>
+  <p style="color: green;"><%= flash.notice %></p>
+<% elsif flash.alert %>
+  <p style="color: red;"><%= flash.alert %></p>
+<% end %>

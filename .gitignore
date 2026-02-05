@@ -34,4 +34,5 @@
 /config/master.key
 
 /app/posts
+/app/reviews
 /app/assets/images

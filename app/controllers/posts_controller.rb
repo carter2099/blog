@@ -1,4 +1,3 @@
-require "redcarpet"
 require "rss"
 
 class PostsController < ApplicationController
@@ -10,15 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    file = File.new(@post.path)
-    markdown = Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(
-        hard_wrap: true,
-        filter_html: true
-      ),
-      fenced_code_blocks: true
-    )
-    @content = markdown.render(file.read).html_safe
+    @content = MarkdownRenderer.render_file(@post.path)
   end
 
   def new
@@ -113,27 +104,37 @@ class PostsController < ApplicationController
   end
 
   def rss
-    posts = Post.order(created_at: :desc).limit(20)
+    posts = Post.order(created_at: :desc).limit(40)
+    reviews = Review.order(created_at: :desc).limit(40)
+    items = posts.map { |post| { type: :post, record: post, updated_at: post.created_at } }
+    items.concat(
+      reviews.map do |review|
+        { type: :review, record: review, updated_at: review.created_at }
+      end
+    )
+    items = items.sort_by { |item| item[:updated_at] }.reverse.first(20)
     rss = RSS::Maker.make("atom") do |maker|
       maker.channel.author = "carter2099"
-      maker.channel.updated = Time.now.utc
+      maker.channel.updated = items.first&.dig(:updated_at)&.utc || Time.now.utc
       maker.channel.about = "https://blog.carter2099.com/"
       maker.channel.title = "blog.carter2099.com"
 
-      posts.each do |post|
+      items.each do |entry|
         maker.items.new_item do |item|
-          item.link = "https://blog.carter2099.com/posts/#{post.id}"
-          item.title = post.title
-          item.updated = post.created_at.to_time.utc
-          markdown = Redcarpet::Markdown.new(
-            Redcarpet::Render::HTML.new(
-              hard_wrap: true,
-              filter_html: true
-            ),
-            fenced_code_blocks: true
-          )
-          file = File.new(post.path)
-          content = markdown.render(file.read).html_safe
+          if entry[:type] == :post
+            post = entry[:record]
+            item.link = "https://blog.carter2099.com/posts/#{post.id}"
+            item.title = post.title
+            item.updated = post.created_at.to_time.utc
+            content = MarkdownRenderer.render_file(post.path)
+          else
+            review = entry[:record]
+            item.link = "https://blog.carter2099.com/reviews/#{review.id}"
+            item.title = "Review (#{review.review_type}): #{review.title}"
+            item.updated = review.created_at.utc
+            content = +"<p>#{ERB::Util.html_escape(review.review_type)} review - #{review.rating}/5</p>"
+            content << MarkdownRenderer.render_file(review.path)
+          end
           item.content.type = "html"
           item.content.content = content
         end

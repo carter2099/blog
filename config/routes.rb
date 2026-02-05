@@ -27,7 +27,14 @@ Rails.application.routes.draw do
   put "/posts/:id", to: "posts#update"
   delete "/posts/:id", to: "posts#destroy"
 
-#  get "/books", to: "books#index", as: :posts
+  get "/reviews", to: "reviews#index", as: :reviews
+  post "/reviews", to: "reviews#create"
+  get "/reviews/new", to: "reviews#new", as: :new_review
+  get "/reviews/:id/edit", to: "reviews#edit", as: :edit_review
+  get "/reviews/:id", to: "reviews#show", as: :review
+  patch "/reviews/:id", to: "reviews#update"
+  put "/reviews/:id", to: "reviews#update"
+  delete "/reviews/:id", to: "reviews#destroy"
 
   get "rss", to: "posts#rss", defaults: { format: :rss }
 end

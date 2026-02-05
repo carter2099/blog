@@ -1,0 +1,14 @@
+<div class="review-show">
+  <div class="btns">
+    <%= button_to "Edit", edit_review_path, review: @review, method: :get if authenticated? %>
+  <%= button_to "Delete", review_path(@review), method: :delete,
+    data: { turbo_confirm: "Delete review?" } if authenticated? %>
+  </div>
+  <h1><%= @review.title %></h1>
+  <p class="review-meta">
+    <%= @review.review_type %> | Rating: <%= @review.rating %>/5 | <%= @review.created_at.strftime("%a %b %e %Y") %>
+  </p>
+  <div class="review-content">
+    <%= @content %>
+  </div>
+</div>

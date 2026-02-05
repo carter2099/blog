@@ -3,5 +3,6 @@ class HomeController < ApplicationController
 
   def index
     @post = Post.last
+    @review = Review.order(created_at: :desc).first
   end
 end

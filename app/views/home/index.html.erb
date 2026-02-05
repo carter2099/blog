@@ -1,11 +1,15 @@
 <h2>Hello World</h2>
 
 <p>
-I do things
+I occasionally do things
 </p>
 
 <p>
 Most recent post: <%= link_to @post.title, @post %>
+</p>
+
+<p>
+Most recent review: <% if @review %><%= link_to @review.title, @review %><% else %>None yet<% end %>
 </p>
 
 <h2>Other Stuff</h2>

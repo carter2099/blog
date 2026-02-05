@@ -1,0 +1,41 @@
+<div class="reviews-index">
+  <% if authenticated? %>
+    <%= button_to "New Review", new_review_path, method: :get %>
+  <% end %>
+
+  <%= form_with url: reviews_path, method: :get, local: true, class: "reviews-filters" do |form| %>
+    <div class="filter-field">
+      <%= form.label :review_type, "Type" %>
+      <%= form.select :review_type, options_for_select(["All"] + @review_types, @selected_type || "All"), include_blank: false %>
+    </div>
+
+    <div class="filter-field">
+      <%= form.label :q, "Search" %>
+      <%= form.search_field :q, value: @query, placeholder: "Title" %>
+    </div>
+
+    <div class="filter-field">
+      <%= form.label :sort, "Sort" %>
+      <%= form.select :sort, options_for_select([
+        ["Newest", ""],
+        ["Rating (High to Low)", "rating_desc"],
+        ["Rating (Low to High)", "rating_asc"]
+      ], @sort.to_s) %>
+    </div>
+
+    <div class="filter-actions">
+      <%= form.submit "Apply" %>
+    </div>
+  <% end %>
+
+  <% if @reviews.any? %>
+    <% @reviews.each do |review| %>
+      <div class="review-card">
+        <%= link_to review.title, review %>
+        <span class="review-meta"><%= review.review_type %> | Rating: <%= review.rating %>/5 | <%= review.created_at.strftime("%a %b %e %Y") %></span>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews found.</p>
+  <% end %>
+</div>
