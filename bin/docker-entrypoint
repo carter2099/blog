@@ -6,6 +6,8 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
+mkdir -p app/posts app/reviews
+
 ./bin/rails db:prepare
 
 exec "${@}"
