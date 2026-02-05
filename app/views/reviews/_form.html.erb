@@ -3,10 +3,15 @@
   <%= form.text_field :title, required: true %>
 
   <%= form.label :review_type, "Type" %>
-  <%= form.select :review_type, options_for_select(Review::REVIEW_TYPES, review.review_type), required: true %>
+  <%= form.select :review_type, options_for_select(ReviewType.pluck(:name), review.review_type&.name), required: true %>
 
   <%= form.label :rating %>
   <%= form.number_field :rating, value: review.rating, min: 0, max: 5, step: 0.1, required: true %>
+
+  <div id="author-field" style="<%= "display:none" unless review.review_type_id == ReviewType::BOOK %>">
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
 
   <div>
     <%= form.label :file %>
@@ -20,6 +25,12 @@
     <%= form.submit value: "Submit", class: "review-submit-button" %>
   </div>
 <% end %>
+
+<script>
+  document.querySelector("#review_review_type").addEventListener("change", function() {
+    document.querySelector("#author-field").style.display = this.value === "Book" ? "" : "none";
+  });
+</script>
 
 <% if flash.notice %>
   <p style="color: green;"><%= flash.notice %></p>

@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
 
   def index
-    @review_types = Review::REVIEW_TYPES
+    @review_types = ReviewType.pluck(:name)
     @selected_type = params[:review_type].presence
     @query = params[:q].to_s.strip
     @sort = params[:sort].presence
@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
     @selected_type = nil if @selected_type == "All"
     @reviews = Review.all
     if @selected_type.present?
-      @reviews = @reviews.where(review_type: @selected_type)
+      @reviews = @reviews.where(review_type: ReviewType.find_by(name: @selected_type))
     end
 
     if @query.present?
@@ -43,8 +43,9 @@ class ReviewsController < ApplicationController
     review_params = validate_params
 
     @review.title = review_params[:title]
-    @review.review_type = review_params[:review_type]
+    @review.review_type = ReviewType.find_by!(name: review_params[:review_type])
     @review.rating = review_params[:rating]
+    @review.author = review_params[:author]
 
     if review_params[:file].present?
       file = review_params[:file]
@@ -85,8 +86,9 @@ class ReviewsController < ApplicationController
 
     review_update_args = {
       title: review_params[:title],
-      review_type: review_params[:review_type],
-      rating: review_params[:rating]
+      review_type: ReviewType.find_by!(name: review_params[:review_type]),
+      rating: review_params[:rating],
+      author: review_params[:author]
     }
 
     if review_params[:file].present?

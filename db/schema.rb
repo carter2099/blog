@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_05_203009) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_05_220138) do
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "path"
@@ -18,15 +18,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_203009) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "review_types", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_review_types_on_name", unique: true
+  end
+
   create_table "reviews", force: :cascade do |t|
+    t.string "author"
     t.datetime "created_at", null: false
     t.string "path", null: false
     t.float "rating", null: false
-    t.string "review_type", null: false
+    t.integer "review_type_id", null: false
     t.string "title", null: false
     t.datetime "updated_at", null: false
     t.index ["rating"], name: "index_reviews_on_rating"
-    t.index ["review_type"], name: "index_reviews_on_review_type"
+    t.index ["review_type_id"], name: "index_reviews_on_review_type_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -46,5 +54,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_203009) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "reviews", "review_types"
   add_foreign_key "sessions", "users"
 end

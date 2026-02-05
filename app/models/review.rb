@@ -1,7 +1,11 @@
 class Review < ApplicationRecord
-  REVIEW_TYPES = %w[Books Movies Shows Products].freeze
+  belongs_to :review_type
 
-  validates :title, :review_type, :rating, :path, presence: true
-  validates :review_type, inclusion: { in: REVIEW_TYPES }
+  validates :title, :rating, :path, presence: true
   validates :rating, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
+  validates :author, presence: true, if: :book?
+
+  def book?
+    review_type_id == ReviewType::BOOK
+  end
 end

@@ -130,9 +130,9 @@ class PostsController < ApplicationController
           else
             review = entry[:record]
             item.link = "https://blog.carter2099.com/reviews/#{review.id}"
-            item.title = "Review (#{review.review_type}): #{review.title}"
+            item.title = "Review (#{review.review_type.name}): #{review.title}"
             item.updated = review.created_at.utc
-            content = +"<p>#{ERB::Util.html_escape(review.review_type)} review - #{review.rating}/5</p>"
+            content = +"<p>#{ERB::Util.html_escape(review.review_type.name)} review - #{review.rating}/5</p>"
             content << MarkdownRenderer.render_file(review.path)
           end
           item.content.type = "html"

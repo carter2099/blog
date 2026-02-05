@@ -5,8 +5,11 @@
     data: { turbo_confirm: "Delete review?" } if authenticated? %>
   </div>
   <h1><%= @review.title %></h1>
+  <% if @review.author.present? %>
+    <h2 class="review-author"> <%= @review.author %></h2>
+  <% end %>
   <p class="review-meta">
-    <%= @review.review_type %> | Rating: <%= @review.rating %>/5 | <%= @review.created_at.strftime("%a %b %e %Y") %>
+    <%= @review.review_type.name %> | Rating: <%= @review.rating %>/5 | <%= @review.created_at.strftime("%a %b %e %Y") %>
   </p>
   <div class="review-content">
     <%= @content %>

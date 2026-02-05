@@ -1,0 +1,15 @@
+book:
+  id: 1
+  name: Book
+
+movie:
+  id: 2
+  name: Movie
+
+show:
+  id: 3
+  name: Show
+
+product:
+  id: 4
+  name: Product
