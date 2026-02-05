@@ -113,7 +113,7 @@ class PostsController < ApplicationController
   end
 
   def rss
-    posts = Post.last(20)
+    posts = Post.order(created_at: :desc).limit(20)
     rss = RSS::Maker.make("atom") do |maker|
       maker.channel.author = "carter2099"
       maker.channel.updated = Time.now.utc
