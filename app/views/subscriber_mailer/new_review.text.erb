@@ -1,4 +1,4 @@
-<%= @review.title %>
+<%= @review.title %><%= " by #{@review.author}" if @review.book? %>
 <%= @review.review_type.name %> Review — <%= @review.formatted_rating %>
 
 <% if @content %><%= strip_tags(@content) %><% end %>
