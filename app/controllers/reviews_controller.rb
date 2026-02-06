@@ -47,6 +47,10 @@ class ReviewsController < ApplicationController
     @review.rating = review_params[:rating]
     @review.author = review_params[:author]
 
+    if review_params[:main_image].present?
+      process_main_image(review_params[:main_image])
+    end
+
     if review_params[:file].present?
       @review.path = process_file(review_params[:file])
     end
@@ -85,6 +89,10 @@ class ReviewsController < ApplicationController
       rating: review_params[:rating],
       author: review_params[:author]
     }
+
+    if review_params[:main_image].present?
+      process_main_image(review_params[:main_image])
+    end
 
     if review_params[:file].present?
       file = review_params[:file]
@@ -147,6 +155,18 @@ class ReviewsController < ApplicationController
       File.delete(file_path) if File.exist?(file_path)
       File.binwrite(file_path, content)
       file_path
+    end
+
+    def process_main_image(image)
+      logger.info("Received main image #{image.original_filename}")
+      images_dir = Rails.root.join("app", "assets", "images")
+      FileUtils.mkdir_p(images_dir)
+      filename = image.original_filename.gsub(/ /, "-")
+      image_path = images_dir.join(filename)
+      File.delete(image_path) if File.exist?(image_path)
+      File.binwrite(image_path, image.read)
+      @review.main_image = filename
+      PostsHelper.load_post_images
     end
 
     def process_images(images)

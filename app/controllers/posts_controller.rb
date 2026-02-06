@@ -130,9 +130,13 @@ class PostsController < ApplicationController
           else
             review = entry[:record]
             item.link = "https://blog.carter2099.com/reviews/#{review.id}"
-            item.title = "Review (#{review.review_type.name}): #{review.title}"
+            item.title = "#{review.review_type.name} Review: #{review.title}#{review.book? ? " by #{review.author}" : ""}"
             item.updated = review.created_at.utc
-            content = +"<p>#{ERB::Util.html_escape(review.review_type.name)} review - #{review.rating}/5</p>"
+            content = +""
+            if review.main_image.present?
+              content << "<img src=\"https://blog.carter2099.com/assets/#{review.main_image}\" alt=\"#{ERB::Util.html_escape(review.title)}\" />"
+            end
+            content << "<p>#{ERB::Util.html_escape(review.review_type.name)} Review: #{review.rating % 1 == 0.0 ? review.rating.to_i : review.rating}/5</p>"
             content << MarkdownRenderer.render_file(review.path) if review.path.present?
           end
           item.content.type = "html"

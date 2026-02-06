@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_05_225724) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_06_000000) do
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "path"
@@ -28,6 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_05_225724) do
   create_table "reviews", force: :cascade do |t|
     t.string "author"
     t.datetime "created_at", null: false
+    t.string "main_image"
     t.string "path"
     t.float "rating", null: false
     t.integer "review_type_id", null: false

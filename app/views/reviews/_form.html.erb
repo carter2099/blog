@@ -14,6 +14,10 @@
   </div>
 
   <div>
+    <%= form.label :main_image, "Main Image" %>
+    <%= form.file_field :main_image, accept: "image/*" %>
+  </div>
+  <div>
     <%= form.label :file %>
     <%= form.file_field :file, accept: ".md" %>
   </div>

@@ -5,6 +5,9 @@
     data: { turbo_confirm: "Delete review?" } if authenticated? %>
   </div>
   <h1><%= @review.title %></h1>
+  <% if @review.main_image.present? %>
+    <img src="/assets/<%= @review.main_image %>" alt="<%= @review.title %>" class="review-main-image">
+  <% end %>
   <% if @review.author.present? %>
     <h2 class="review-author"> <%= @review.author %></h2>
   <% end %>
