@@ -12,4 +12,11 @@ class Review < ApplicationRecord
   def formatted_rating
     "#{rating % 1 == 0.0 ? rating.to_i : rating}/5"
   end
+
+  after_create_commit :notify_subscribers
+
+  private
+    def notify_subscribers
+      NotifySubscribersJob.perform_later(self)
+    end
 end

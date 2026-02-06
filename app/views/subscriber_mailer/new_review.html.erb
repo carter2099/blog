@@ -1,0 +1,13 @@
+<h2><%= @review.title %></h2>
+<p><%= @review.review_type.name %> Review &mdash; <%= @review.formatted_rating %></p>
+
+<% if @review.main_image.present? %>
+  <img src="<%= "https://blog.carter2099.com/assets/#{@review.main_image}" %>" alt="<%= @review.title %>">
+<% end %>
+
+<% if @content %>
+  <%= @content %>
+<% end %>
+
+<hr>
+<p><small><%= link_to "Unsubscribe", unsubscribe_subscriber_url(token: @subscriber.token) %></small></p>

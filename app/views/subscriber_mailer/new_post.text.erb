@@ -1,0 +1,6 @@
+<%= @post.title %>
+
+<%= strip_tags(@content) %>
+
+---
+Unsubscribe: <%= unsubscribe_subscriber_url(token: @subscriber.token) %>

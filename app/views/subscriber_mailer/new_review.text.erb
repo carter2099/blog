@@ -1,0 +1,7 @@
+<%= @review.title %>
+<%= @review.review_type.name %> Review — <%= @review.formatted_rating %>
+
+<% if @content %><%= strip_tags(@content) %><% end %>
+
+---
+Unsubscribe: <%= unsubscribe_subscriber_url(token: @subscriber.token) %>

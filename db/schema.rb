@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_06_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_06_202445) do
   create_table "posts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "path"
@@ -45,6 +45,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_06_000001) do
     t.string "user_agent"
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "subscribers", force: :cascade do |t|
+    t.datetime "confirmed_at"
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_subscribers_on_email", unique: true
+    t.index ["token"], name: "index_subscribers_on_token", unique: true
   end
 
   create_table "users", force: :cascade do |t|

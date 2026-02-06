@@ -1,0 +1,6 @@
+<h2><%= @post.title %></h2>
+
+<%= @content %>
+
+<hr>
+<p><small><%= link_to "Unsubscribe", unsubscribe_subscriber_url(token: @subscriber.token) %></small></p>
