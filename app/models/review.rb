@@ -8,4 +8,8 @@ class Review < ApplicationRecord
   def book?
     review_type_id == ReviewType::BOOK
   end
+
+  def formatted_rating
+    "#{rating % 1 == 0.0 ? rating.to_i : rating}/5"
+  end
 end

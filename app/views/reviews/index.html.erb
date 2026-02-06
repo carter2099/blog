@@ -32,7 +32,7 @@
     <% @reviews.each do |review| %>
       <div class="review-card">
         <%= link_to review.title, review %>
-        <span class="review-meta"><%= review.review_type.name %> | Rating: <%= review.rating %>/5 | <%= review.created_at.strftime("%a %b %e %Y") %></span>
+        <span class="review-meta"><%= review.review_type.name %> | Rating: <%= review.formatted_rating %> | <%= review.created_at.strftime("%a %b %e %Y") %></span>
       </div>
     <% end %>
   <% else %>

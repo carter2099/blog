@@ -136,7 +136,7 @@ class PostsController < ApplicationController
             if review.main_image.present?
               content << "<img src=\"https://blog.carter2099.com/assets/#{review.main_image}\" alt=\"#{ERB::Util.html_escape(review.title)}\" />"
             end
-            content << "<p>#{ERB::Util.html_escape(review.review_type.name)} Review: #{review.rating % 1 == 0.0 ? review.rating.to_i : review.rating}/5</p>"
+            content << "<p>#{ERB::Util.html_escape(review.review_type.name)} Review: #{review.formatted_rating}</p>"
             content << MarkdownRenderer.render_file(review.path) if review.path.present?
           end
           item.content.type = "html"
