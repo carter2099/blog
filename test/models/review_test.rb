@@ -13,13 +13,23 @@ class ReviewTest < ActiveSupport::TestCase
     assert review.valid?
   end
 
+  test "valid review without path" do
+    review = Review.new(
+      title: "Dune",
+      review_type: review_types(:book),
+      rating: 5,
+      author: "Frank Herbert"
+    )
+
+    assert review.valid?
+  end
+
   test "rating must be between 0 and 5" do
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
       rating: 5.1,
-      author: "Frank Herbert",
-      path: "app/reviews/dune.md"
+      author: "Frank Herbert"
     )
 
     assert_not review.valid?
@@ -30,8 +40,7 @@ class ReviewTest < ActiveSupport::TestCase
       title: "Dune",
       review_type: review_types(:book),
       rating: 4.5,
-      author: "Frank Herbert",
-      path: "app/reviews/dune.md"
+      author: "Frank Herbert"
     )
 
     assert review.valid?
@@ -41,8 +50,7 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 5,
-      path: "app/reviews/dune.md"
+      rating: 5
     )
 
     assert_not review.valid?
@@ -53,8 +61,7 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Inception",
       review_type: review_types(:movie),
-      rating: 4.5,
-      path: "app/reviews/inception.md"
+      rating: 4.5
     )
 
     assert review.valid?

@@ -30,7 +30,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @content = MarkdownRenderer.render_file(@review.path)
+    @content = MarkdownRenderer.render_file(@review.path) if @review.path.present?
   end
 
   def new
@@ -48,25 +48,20 @@ class ReviewsController < ApplicationController
     @review.author = review_params[:author]
 
     if review_params[:file].present?
-      file = review_params[:file]
-      @review.path = process_file(file)
+      @review.path = process_file(review_params[:file])
+    end
 
-      if @review.save
-        logger.info("Succesfully saved review: #{@review.inspect}")
-        redirect_to @review
-      else
-        logger.error("Error saving review: #{@review.errors.full_messages}")
-        flash.now.alert = "Error saving review: #{@review.errors.full_messages.join(',')}"
-        render :new, status: :unprocessable_entity
-      end
+    if review_params[:images].present?
+      process_images(review_params[:images])
+    end
 
-      if review_params[:images].present?
-        process_images(review_params[:images])
-      end
+    if @review.save
+      logger.info("Succesfully saved review: #{@review.inspect}")
+      redirect_to @review
     else
-      flash.now.alert = "Please provide a file"
-      @hide_upload_footer = true
-      render :new, status: :bad_request
+      logger.error("Error saving review: #{@review.errors.full_messages}")
+      flash.now.alert = "Error saving review: #{@review.errors.full_messages.join(',')}"
+      render :new, status: :unprocessable_entity
     end
   rescue ActionController::ParameterMissing => ve
     logger.warn(ve.message)

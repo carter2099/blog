@@ -133,7 +133,7 @@ class PostsController < ApplicationController
             item.title = "Review (#{review.review_type.name}): #{review.title}"
             item.updated = review.created_at.utc
             content = +"<p>#{ERB::Util.html_escape(review.review_type.name)} review - #{review.rating}/5</p>"
-            content << MarkdownRenderer.render_file(review.path)
+            content << MarkdownRenderer.render_file(review.path) if review.path.present?
           end
           item.content.type = "html"
           item.content.content = content

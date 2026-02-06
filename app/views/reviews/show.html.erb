@@ -11,7 +11,9 @@
   <p class="review-meta">
     <%= @review.review_type.name %> | Rating: <%= @review.rating %>/5 | <%= @review.created_at.strftime("%a %b %e %Y") %>
   </p>
-  <div class="review-content">
-    <%= @content %>
-  </div>
+  <% if @content.present? %>
+    <div class="review-content">
+      <%= @content %>
+    </div>
+  <% end %>
 </div>

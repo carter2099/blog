@@ -6,7 +6,7 @@
   <%= form.select :review_type, options_for_select(ReviewType.pluck(:name), review.review_type&.name), required: true %>
 
   <%= form.label :rating %>
-  <%= form.number_field :rating, value: review.rating, min: 0, max: 5, step: 0.1, required: true %>
+  <%= form.number_field :rating, value: review.rating, min: 0, max: 5, step: 0.01, required: true %>
 
   <div id="author-field" style="<%= "display:none" unless review.review_type_id == ReviewType::BOOK %>">
     <%= form.label :author %>
