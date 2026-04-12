@@ -120,6 +120,11 @@ form.reviews-filters input[type="text"] {
     margin-bottom: 0;
 }
 
+.review-show .review-main-image {
+    max-width: 300px;
+    height: auto;
+}
+
 .review-show .review-meta {
     opacity: 0.8;
     font-family: monospace;
