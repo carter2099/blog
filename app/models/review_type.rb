@@ -3,6 +3,7 @@ class ReviewType < ApplicationRecord
   MOVIE = 2
   SHOW = 3
   PRODUCT = 4
+  VIDEO_GAME = 5
 
   has_many :reviews
 

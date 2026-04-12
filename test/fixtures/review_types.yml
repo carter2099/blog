@@ -13,3 +13,7 @@ show:
 product:
   id: 4
   name: Product
+
+video_game:
+  id: 5
+  name: Video Game
