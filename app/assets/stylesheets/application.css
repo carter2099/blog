@@ -211,3 +211,20 @@ footer form {
     display: inline-block;
     margin-right: 0.5rem;
 }
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.admin-table th,
+.admin-table td {
+    text-align: left;
+    padding: 0.4rem 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+    font-weight: bold;
+}

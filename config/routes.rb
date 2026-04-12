@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   put "/reviews/:id", to: "reviews#update"
   delete "/reviews/:id", to: "reviews#destroy"
 
+  get "/admin", to: "admin#index"
+
   get "/subscribe", to: "subscribers#new", as: :new_subscriber
   post "/subscribe", to: "subscribers#create"
   get "/subscribe/confirm/:token", to: "subscribers#confirm", as: :confirm_subscriber

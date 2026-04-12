@@ -1,0 +1,21 @@
+<h2>Subscribers</h2>
+<p><strong><%= @confirmed_count %></strong> confirmed, <strong><%= @total_count - @confirmed_count %></strong> unconfirmed — <strong><%= @total_count %></strong> total</p>
+
+<table class="admin-table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Status</th>
+      <th>Signed up</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscribers.each do |subscriber| %>
+      <tr>
+        <td><%= subscriber.email %></td>
+        <td><%= subscriber.confirmed? ? "Confirmed" : "Unconfirmed" %></td>
+        <td><%= subscriber.created_at.strftime("%b %e, %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
