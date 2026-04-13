@@ -1,18 +1,9 @@
 <h2>Hello World</h2>
 
-<p>
-Currently Reading: The LOTR: The Return of the King
-<br>
-Currently Playing: Dark Souls 2, Spider-Man Remastered
-</p>
-
-<p>
-Most recent post: <%= link_to @post.title, @post %>
-</p>
-
-<p>
-Most recent review: <% if @review %><%= link_to @review.title, @review %><% else %>None yet<% end %>
-</p>
+<p>Currently Reading: The LOTR: The Return of the King</p>
+<p>Currently Playing: Dark Souls 2, Spider-Man Remastered</p>
+<p>Most recent post: <%= link_to @post.title, @post %></p>
+<p>Most recent review: <% if @review %><%= link_to @review.title, @review %><% else %>None yet<% end %></p>
 
 <h2>Other Stuff</h2>
 <p>
