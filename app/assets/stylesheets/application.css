@@ -140,9 +140,12 @@ form.reviews-filters input[type="text"] {
 }
 
 code {
+    background-color: var(--code-bg-color);
+}
+
+pre code {
     display: block;
     padding: 0.5rem;
-    background-color: var(--code-bg-color);
 }
 
 form * {
