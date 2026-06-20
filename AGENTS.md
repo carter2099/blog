@@ -123,19 +123,7 @@ resources :passwords, param: :token
 
 `lib/markdown_renderer.rb` — Redcarpet configured with `hard_wrap: true`, `filter_html: true`, `fenced_code_blocks: true`. Used in both post/review display and RSS feed generation.
 
-**Formatting gotchas** (because `hard_wrap: true` changes Redcarpet's parsing):
-
-- **Blank line before lists is mandatory.** Without a blank line between a paragraph and a list, Redcarpet treats the list markers as literal text inside a `<p>` with `<br>` line breaks — they won't render as `<ul>`/`<li>`.
-  ```markdown
-  ❌ Intro text:
-  - item 1
-  ✅ Intro text:
-
-  - item 1
-  ```
-- **Blank line before headings** is also required for the same reason.
-- **Use spaces, not tabs, for nested list indentation.** Redcarpet treats tab-indented lines as code blocks.
-- **Inline backtick code** (`` `code` ``) renders as `<code>` which is styled inline (background color only). Fenced code blocks (` ``` `) render as `<pre><code>` with block display and padding.
+**Formatting rules for content authors:** See the `blog-post`, `blog-edit`, and `blog-review` skills — they document the Redcarpet-specific gotchas (blank line before lists, spaces vs tabs for nesting, etc.).
 
 ### Database
 
