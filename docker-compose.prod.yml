@@ -4,6 +4,13 @@ services:
     ports:
       - "33099:3099"
     restart: unless-stopped
+    mem_limit: 1g
+    pids_limit: 256
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     environment:
       - RAILS_ENV=production
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
