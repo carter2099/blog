@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.10] - 2026-08-18
+
+### Changed
+
+- Bump sqlite3 from 2.9.5 to 2.9.6
+- Bump brakeman from 8.0.5 to 8.0.6
+- Bump thruster from 0.1.23 to 0.1.25
+
 ## [0.1.9] - 2026-08-14
 
 ### Changed
