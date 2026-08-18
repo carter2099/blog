@@ -1,0 +1,12 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "3f84f28d2c766cf9930bc8cb01d61210b8cfa80e08486458c9d7f585c1ef4b99",
+      "note": "Post destroy moves the post markdown file into app/posts/deleted. The path is always derived from upload processing constrained to app/posts (see process_file), never user-controlled arbitrary paths. Vetted false positive."
+    },
+    {
+      "fingerprint": "52b2e38f6ff4ff6f840ba372a12f58752255927f826392d9fe341ed63c912312",
+      "note": "Review destroy moves the review markdown file into app/reviews/deleted. The path is always derived from upload processing constrained to app/reviews (see process_file), never user-controlled arbitrary paths. Vetted false positive."
+    }
+  ]
+}
