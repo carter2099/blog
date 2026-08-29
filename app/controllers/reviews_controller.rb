@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   allow_unauthenticated_access only: %i[ index show ]
   before_action :set_review, only: %i[ show edit update destroy ]
+  REVIEWS_PER_PAGE = 10
 
   def index
     @review_types = ReviewType.pluck(:name)
@@ -21,12 +22,24 @@ class ReviewsController < ApplicationController
 
     case @sort
     when "rating_desc"
-      @reviews = @reviews.order(rating: :desc, created_at: :desc)
+      @reviews = @reviews.order(rating: :desc, created_at: :desc, id: :desc)
     when "rating_asc"
-      @reviews = @reviews.order(rating: :asc, created_at: :desc)
+      @reviews = @reviews.order(rating: :asc, created_at: :desc, id: :desc)
     else
-      @reviews = @reviews.order(created_at: :desc)
+      @reviews = @reviews.order(created_at: :desc, id: :desc)
     end
+
+    review_count = @reviews.count
+    @total_pages = [ (review_count + REVIEWS_PER_PAGE - 1) / REVIEWS_PER_PAGE, 1 ].max
+    @page = params[:page].to_i
+    @page = 1 if @page < 1
+    @page = @total_pages if @page > @total_pages
+    @reviews = @reviews.offset((@page - 1) * REVIEWS_PER_PAGE).limit(REVIEWS_PER_PAGE)
+    @pagination_params = {
+      review_type: @selected_type,
+      q: @query.presence,
+      sort: @sort
+    }.compact
   end
 
   def show
