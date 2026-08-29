@@ -90,7 +90,7 @@ Custom Rails 8 authentication (no Devise):
 - **User** — `has_secure_password`, normalizes email, has many sessions
 - **Session** — belongs to user, tracks IP/user agent for security
 - **Post** — validates title/path presence; content lives on disk
-- **Review** — belongs to `ReviewType`; validates title/rating; rating is float 0-5; `author` required for books; optional `path` (markdown content) and `main_image` (filename served from `/assets/`); `formatted_rating` returns display string like `4/5` or `3.5/5`
+- **Review** — belongs to `ReviewType`; validates title/rating; rating is float 0-10; `author` required for books; optional `path` (markdown content) and `main_image` (filename served from `/assets/`); `formatted_rating` returns display string like `8/10` or `9.5/10`
 - **ReviewType** — has many reviews; constants: `BOOK=1`, `MOVIE=2`, `SHOW=3`, `PRODUCT=4`; names are singular (Book, Movie, Show, Product)
 - **Current** — request-scoped attributes: delegates `user` from `session`
 

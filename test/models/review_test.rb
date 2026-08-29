@@ -5,7 +5,7 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 5,
+      rating: 10,
       author: "Frank Herbert",
       path: "app/reviews/dune.md"
     )
@@ -17,18 +17,18 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 5,
+      rating: 10,
       author: "Frank Herbert"
     )
 
     assert review.valid?
   end
 
-  test "rating must be between 0 and 5" do
+  test "rating must be between 0 and 10" do
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 5.1,
+      rating: 10.1,
       author: "Frank Herbert"
     )
 
@@ -39,18 +39,28 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 4.5,
+      rating: 9.5,
       author: "Frank Herbert"
     )
 
     assert review.valid?
   end
 
+  test "formats integer and decimal ratings out of 10" do
+    review = Review.new(rating: 8)
+
+    assert_equal "8/10", review.formatted_rating
+
+    review.rating = 9.5
+
+    assert_equal "9.5/10", review.formatted_rating
+  end
+
   test "author is required for books" do
     review = Review.new(
       title: "Dune",
       review_type: review_types(:book),
-      rating: 5
+      rating: 10
     )
 
     assert_not review.valid?
@@ -61,7 +71,7 @@ class ReviewTest < ActiveSupport::TestCase
     review = Review.new(
       title: "Inception",
       review_type: review_types(:movie),
-      rating: 4.5
+      rating: 9
     )
 
     assert review.valid?
