@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change review ratings from a 5-point scale to a 10-point scale and double existing scores
 - Show Black Myth: Wukong as the currently playing game
 - Paginate reviews ten per page while retaining type, search, and sort selections
+- Add First and Last review page links and remove the extra separator below the pager
 
 ## [0.1.12] - 2026-08-28
 

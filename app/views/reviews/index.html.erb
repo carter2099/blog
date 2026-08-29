@@ -42,11 +42,13 @@
   <% if @total_pages > 1 %>
     <nav class="pagination" aria-label="Review pages">
       <% if @page > 1 %>
+        <%= link_to "First", reviews_path(@pagination_params.merge(page: 1)), rel: "first" %>
         <%= link_to "Previous", reviews_path(@pagination_params.merge(page: @page - 1)), rel: "prev" %>
       <% end %>
       <span>Page <%= @page %> of <%= @total_pages %></span>
       <% if @page < @total_pages %>
         <%= link_to "Next", reviews_path(@pagination_params.merge(page: @page + 1)), rel: "next" %>
+        <%= link_to "Last", reviews_path(@pagination_params.merge(page: @total_pages)), rel: "last" %>
       <% end %>
     </nav>
   <% end %>
