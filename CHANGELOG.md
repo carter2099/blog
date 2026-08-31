@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.13] - 2026-08-31
+
+### Changed
+
+- Bump selenium-webdriver from 4.47.0 to 4.48.0
+
 ## [0.1.12] - 2026-08-28
 
 ### Changed
