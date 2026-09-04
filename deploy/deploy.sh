@@ -17,6 +17,8 @@ MASTER_KEY="$PRODUCTION_APP/config/master.key"
 readonly MASTER_KEY
 HEALTH_URL="${BLOG_HEALTH_URL:-http://127.0.0.1:33099/up}"
 readonly HEALTH_URL
+PUBLIC_HOST='blog.carter2099.com'
+readonly PUBLIC_HOST
 HEALTH_TIMEOUT="${BLOG_HEALTH_TIMEOUT:-60}"
 readonly HEALTH_TIMEOUT
 BRANCH='main'
@@ -123,7 +125,8 @@ compose() {
 wait_for_health() {
   local attempt
   for ((attempt = 0; attempt < HEALTH_TIMEOUT; attempt++)); do
-    if curl --fail --silent --show-error --max-time 3 "$HEALTH_URL" >/dev/null; then
+    if curl --fail --silent --show-error --max-time 3 \
+      --header "Host: $PUBLIC_HOST" "$HEALTH_URL" >/dev/null; then
       return 0
     fi
     sleep 1

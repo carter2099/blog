@@ -2,7 +2,7 @@ services:
   web:
     build: .
     ports:
-      - "33099:3099"
+      - "127.0.0.1:33099:3099"
     restart: unless-stopped
     mem_limit: 1g
     pids_limit: 256
