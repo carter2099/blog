@@ -122,6 +122,12 @@ compose() {
   (cd -- "$PRODUCTION_APP" && docker compose -f "$COMPOSE_FILE" "$@")
 }
 
+# Checked-out files are copied into the image and read by the non-root rails
+# user, so worktree mutations must not inherit the script's private umask.
+production_worktree_git() {
+  (umask 022 && git -C "$PRODUCTION_APP" "$@")
+}
+
 wait_for_health() {
   local attempt
   for ((attempt = 0; attempt < HEALTH_TIMEOUT; attempt++)); do
@@ -174,7 +180,7 @@ rollback() {
     return
   fi
   rollback_done=1
-  git -C "$PRODUCTION_APP" reset --hard "$old_commit" >/dev/null 2>&1 || failed=1
+  production_worktree_git reset --hard "$old_commit" >/dev/null 2>&1 || failed=1
   docker image tag "$rollback_tag" blog-web >/dev/null 2>&1 || failed=1
   compose up -d --no-build --force-recreate web >/dev/null 2>&1 || failed=1
   restore_wrapper "$PRODUCTION_ROOT/up.sh" up.sh || failed=1
@@ -194,7 +200,7 @@ export RAILS_MASTER_KEY
 RAILS_MASTER_KEY="$(<"$MASTER_KEY")"
 transaction_started=1
 
-if ! git -C "$PRODUCTION_APP" merge --ff-only "origin/$BRANCH"; then
+if ! production_worktree_git merge --ff-only "origin/$BRANCH"; then
   rollback
   exit 1
 fi
