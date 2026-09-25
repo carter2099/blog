@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.18] - 2026-09-25
+
+### Fixed
+
+- Pin json to 2.21.2: json 3.0.2 broke ActiveSupport 8.1.3.1 JSON decoding, so every request carrying a session cookie (sign-in, admin, returning visitors) returned 500 and Solid Queue could not start
+
 ## [0.1.17] - 2026-09-25
 
 ### Changed
