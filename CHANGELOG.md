@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.17] - 2026-09-25
+
+### Changed
+
+- Bump addressable from 2.8.7 to 2.9.0
+- Bump websocket-driver from 0.8.0 to 0.8.2
+
 ## [0.1.16] - 2026-09-25
 
 ### Changed
