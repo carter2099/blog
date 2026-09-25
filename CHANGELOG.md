@@ -14,6 +14,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.16] - 2026-09-25
+
+### Changed
+
+- Bump mail from 2.9.0 to 2.9.1
+- Bump msgpack from 1.8.0 to 1.8.5
+- Bump json from 2.21.1 to 3.0.2 (also bump rubocop 1.80.2 → 1.91.0, rubocop-ast 1.46.0 → 1.50.0, prism 1.6.0 → 1.9.0 to lift rubocop's `json ~> 2.3` pin)
+- Bump action_text-trix from 2.1.15 to 2.1.19
+- Bump net-imap from 0.5.12 to 0.6.7
+
 ## [0.1.15] - 2026-09-14
 
 ### Changed
