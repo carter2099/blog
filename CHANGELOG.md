@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.19] - 2026-09-26
+
+### Changed
+
+- Bump rubyzip from 3.2.1 to 3.7.0
+
 ## [0.1.18] - 2026-09-25
 
 ### Fixed
