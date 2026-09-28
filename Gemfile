@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.1"
+gem "rails", "~> 8.1.4"
 # ActiveSupport before 8.1.4 passes JSON.parse options positionally, which json 3
 # rejects: every request carrying a session cookie returns 500. Drop this pin
 # once Rails is 8.1.4 or newer.
