@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.20] - 2026-09-28
+
+### Changed
+
+- Bump rails from 8.1.3.1 to 8.1.4
+- Bump solid_cable from 4.0.2 to 4.1.0
+
 ## [0.1.19] - 2026-09-26
 
 ### Changed
