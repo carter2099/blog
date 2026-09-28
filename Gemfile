@@ -5,7 +5,7 @@ gem "rails", "~> 8.1.1"
 # ActiveSupport before 8.1.4 passes JSON.parse options positionally, which json 3
 # rejects: every request carrying a session cookie returns 500. Drop this pin
 # once Rails is 8.1.4 or newer.
-gem "json", "~> 2.21", ">= 2.21.2"
+gem "json", "~> 3.0"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
