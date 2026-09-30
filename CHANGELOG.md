@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Make the deploy health gate replay the session cookie the app issues on `/session/new`, so a release that breaks cookie decoding rolls back even though `/up` stays healthy
+
 ### Changed
 
 - Change review ratings from a 5-point scale to a 10-point scale and double existing scores
