@@ -15,8 +15,14 @@ COMPOSE_FILE="$PRODUCTION_APP/docker-compose.prod.yml"
 readonly COMPOSE_FILE
 MASTER_KEY="$PRODUCTION_APP/config/master.key"
 readonly MASTER_KEY
-HEALTH_URL="${BLOG_HEALTH_URL:-http://127.0.0.1:33099/up}"
+ORIGIN_URL="${BLOG_ORIGIN_URL:-http://127.0.0.1:33099}"
+readonly ORIGIN_URL
+HEALTH_URL="$ORIGIN_URL/up"
 readonly HEALTH_URL
+SESSION_URL="$ORIGIN_URL/session/new"
+readonly SESSION_URL
+SESSION_COOKIE='_blog_session'
+readonly SESSION_COOKIE
 PUBLIC_HOST='blog.carter2099.com'
 readonly PUBLIC_HOST
 HEALTH_TIMEOUT="${BLOG_HEALTH_TIMEOUT:-60}"
@@ -128,11 +134,36 @@ production_worktree_git() {
   (umask 022 && git -C "$PRODUCTION_APP" "$@")
 }
 
+probe() {
+  curl --fail --silent --show-error --max-time 3 --output /dev/null \
+    --header "Host: $PUBLIC_HOST" "$@"
+}
+
+# /up never reads cookies. On 2026-09-25 json 3 broke ActiveSupport's cookie
+# decoding: /up stayed 200 while every request carrying a session cookie
+# returned 500. So a healthy origin must also accept the session cookie it
+# issues; a made-up cookie proves nothing because the app silently drops it.
+probe_session_cookie() {
+  local headers line cookie=''
+  headers="$(probe --dump-header - "$SESSION_URL")" || return 1
+  while IFS= read -r line; do
+    line="${line%$'\r'}"
+    if [[ "$line" =~ ^[Ss][Ee][Tt]-[Cc][Oo][Oo][Kk][Ii][Ee]:[[:space:]]*($SESSION_COOKIE=[^;]+) ]]; then
+      cookie="${BASH_REMATCH[1]}"
+      break
+    fi
+  done <<<"$headers"
+  if [[ -z "$cookie" ]]; then
+    printf '%s did not set the %s cookie\n' "$SESSION_URL" "$SESSION_COOKIE" >&2
+    return 1
+  fi
+  probe --header "Cookie: $cookie" "$SESSION_URL"
+}
+
 wait_for_health() {
-  local attempt
-  for ((attempt = 0; attempt < HEALTH_TIMEOUT; attempt++)); do
-    if curl --fail --silent --show-error --max-time 3 \
-      --header "Host: $PUBLIC_HOST" "$HEALTH_URL" >/dev/null; then
+  local deadline=$((SECONDS + HEALTH_TIMEOUT))
+  while ((SECONDS < deadline)); do
+    if probe "$HEALTH_URL" && probe_session_cookie; then
       return 0
     fi
     sleep 1
@@ -214,7 +245,8 @@ if ! compose up -d --no-build web; then
 fi
 
 if ! wait_for_health; then
-  printf 'blog health check failed: %s\n' "$HEALTH_URL" >&2
+  printf 'blog health check failed: %s must return 200 and %s must accept the session cookie it sets\n' \
+    "$HEALTH_URL" "$SESSION_URL" >&2
   rollback
   exit 1
 fi
