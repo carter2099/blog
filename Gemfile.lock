@@ -286,7 +286,7 @@ GEM
     rubocop-ast (1.50.0)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
-    rubocop-erb (0.7.1)
+    rubocop-erb (0.7.2)
       herb (~> 0.7)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
