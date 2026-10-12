@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.24] - 2026-10-12
+
+### Changed
+
+- Bump thruster from 0.1.26 to 0.1.27
+
 ## [0.1.23] - 2026-10-09
 
 ### Changed
