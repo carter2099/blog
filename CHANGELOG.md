@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+## [0.1.26] - 2026-10-19
+
+### Changed
+
+- Bump json from 3.0.2 to 3.1.0
+- Bump sqlite3 from 2.9.6 to 2.10.0
+
 ## [0.1.25] - 2026-10-14
 
 ### Changed
