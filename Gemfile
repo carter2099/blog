@@ -5,7 +5,7 @@ gem "rails", "~> 8.1.1"
 # json 3 needs ActiveSupport 8.1.4 or newer: older versions pass JSON.parse
 # options positionally, which json 3 rejects, so every request carrying a
 # session cookie returns 500 (test/integration/session_cookie_test.rb).
-gem "json", "~> 3.0", ">= 3.0.2"
+gem "json", "~> 3.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
