@@ -4,8 +4,10 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 # Rails app lives here
 WORKDIR /rails
 
-# Install base packages (ca-certificates upgrades the base image's stale CA bundle)
+# Install base packages and apply Debian security updates, since the base image
+# tag is no longer rebuilt (ca-certificates upgrades its stale CA bundle)
 RUN apt-get update -qq && \
+    apt-get upgrade -y --no-install-recommends && \
     apt-get install --no-install-recommends -y ca-certificates curl libjemalloc2 libvips sqlite3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
