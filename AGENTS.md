@@ -10,7 +10,7 @@ Rails 8 personal blog with file-based markdown content storage. Single-author de
 
 | Layer | Tools |
 |-------|-------|
-| Backend | Rails 8.1.1, Ruby 3.4.8, SQLite3 |
+| Backend | Rails 8.1.1, Ruby 3.4.11, SQLite3 |
 | Frontend | Propshaft, Importmap, Turbo, Stimulus |
 | Content | Redcarpet (markdown), RSS gem (Atom feeds) |
 | Production | Docker Compose, Solid Cache/Queue/Cable, Thruster |
@@ -144,7 +144,7 @@ resources :passwords, param: :token
 
 ### Deployment
 
-- Docker multi-stage build: Ruby 3.4.3-slim base, Bootsnap + asset precompilation
+- Docker multi-stage build: Ruby 3.4.11-slim-bookworm base, Bootsnap + asset precompilation
 - Runs as non-root `rails:rails` user on port 3099
 - `bin/docker-entrypoint` runs `db:prepare` on boot
 - Production volumes: `./app/posts`, `./app/reviews`, `./app/assets/images`, `./storage`

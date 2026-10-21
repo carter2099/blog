@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade the image's ca-certificates to drop the compromised eMudhra and Sectigo AAA chains
 - Rebuild Thruster's binary from source with Go 1.27.3 (GO-2026-6809 and net/http fixes)
 - Apply Debian bookworm security updates to all image packages, since the Ruby base tag is no longer rebuilt
+- Upgrade Ruby to 3.4.11 (bookworm base) for the zlib 3.2.3 (CVE-2026-27820) and resolv 0.7.2 (CVE-2025-24294, CVE-2026-80212) default gem fixes, and align `.ruby-version` with the image
 
 ## [0.1.26] - 2026-10-19
 
