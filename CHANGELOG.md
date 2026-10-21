@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
 
+### Security
+
+- Upgrade the image's ca-certificates to drop the compromised eMudhra and Sectigo AAA chains
+- Rebuild Thruster's binary from source with Go 1.27.3 (GO-2026-6809 and net/http fixes)
+
 ## [0.1.26] - 2026-10-19
 
 ### Changed
