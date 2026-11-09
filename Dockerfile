@@ -6,6 +6,8 @@ WORKDIR /rails
 
 # Install base packages and apply Debian security updates, since the base image
 # tag is no longer rebuilt (ca-certificates upgrades its stale CA bundle)
+# security-watch: bump to re-run the package upgrade below on the next build
+ARG SECURITY_REFRESH=202611091527
 RUN apt-get update -qq && \
     apt-get upgrade -y --no-install-recommends && \
     apt-get install --no-install-recommends -y ca-certificates curl libjemalloc2 libvips sqlite3 && \
