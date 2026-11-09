@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 8.1.1"
+gem "rails", "~> 8.1.4"
 # json 3 needs ActiveSupport 8.1.4 or newer: older versions pass JSON.parse
 # options positionally, which json 3 rejects, so every request carrying a
 # session cookie returns 500 (test/integration/session_cookie_test.rb).
