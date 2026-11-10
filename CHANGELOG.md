@@ -21,6 +21,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Apply Debian bookworm security updates to all image packages, since the Ruby base tag is no longer rebuilt
 - Upgrade Ruby to 3.4.11 (bookworm base) for the zlib 3.2.3 (CVE-2026-27820) and resolv 0.7.2 (CVE-2025-24294, CVE-2026-80212) default gem fixes, and align `.ruby-version` with the image
 
+## [0.1.32] - 2026-11-10
+
+### Changed
+
+- Bump rack from 3.2.6 to 3.2.8
+
 ## [0.1.31] - 2026-11-09
 
 ### Changed
