@@ -21,7 +21,7 @@ ENV RAILS_ENV="production" \
 
 # Rebuild Thruster at the Gemfile.lock version with a patched Go toolchain;
 # the gem's prebuilt binary lags Go security releases.
-FROM docker.io/library/golang:1.27.3-alpine@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd AS thrust
+FROM docker.io/library/golang:1.27.4-alpine@sha256:0a5f7fe796599ff487605987432e7619ae45beeb2fba4c2ce0b907879932aebf AS thrust
 COPY Gemfile.lock ./
 RUN version="$(sed -n 's/^    thruster (\([0-9.]*\))$/\1/p' Gemfile.lock)" && \
     test -n "$version" && \
