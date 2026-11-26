@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Show Nioh as the currently playing game
 - Paginate reviews ten per page while retaining type, search, and sort selections
 - Add First and Last review page links and remove the extra separator below the pager
+- Audit gems with bundler-audit in CI (`scan_gems` job, `bin/bundler-audit`)
 
 ### Security
 
