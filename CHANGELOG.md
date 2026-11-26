@@ -22,6 +22,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade Ruby to 3.4.11 (bookworm base) for the zlib 3.2.3 (CVE-2026-27820) and resolv 0.7.2 (CVE-2025-24294, CVE-2026-80212) default gem fixes, and align `.ruby-version` with the image
 - Upgrade Ruby to 3.4.13 for Ruby2Shell (CVE-2026-132825, a pre-auth heap overflow in string case conversion) and the six regexp/string flaws fixed with it
 
+## [0.1.39] - 2026-11-26
+
+### Changed
+
+- Bump bootsnap from 1.26.1 to 1.26.2
+- Bump brakeman from 8.1.0 to 8.1.1
+
 ## [0.1.38] - 2026-11-23
 
 ### Changed
