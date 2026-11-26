@@ -44,6 +44,7 @@ bin/rails test test/models/post_test.rb:14   # Run a specific test by line
 bin/rubocop                  # Lint (Rails Omakase + rubocop-erb)
 bin/rubocop -a               # Auto-fix lint issues
 bin/importmap audit          # JS dependency vulnerability check
+bin/bundler-audit            # Gem advisory check (ruby-advisory-db)
 ```
 
 ### Deployment
@@ -154,9 +155,10 @@ resources :passwords, param: :token
 ### CI (GitHub Actions)
 
 Runs on PRs and pushes to main:
-1. **scan_js** — `bin/importmap audit`
-2. **lint** — `bin/rubocop -f github`
-3. **test** — `bin/rails db:test:prepare test test:system` (uploads screenshots on failure)
+1. **scan_gems** — `bin/bundler-audit` (security-watch fixes flagged gems with `gem-update` PRs)
+2. **scan_js** — `bin/importmap audit`
+3. **lint** — `bin/rubocop -f github`
+4. **test** — `bin/rails db:test:prepare test test:system` (uploads screenshots on failure)
 
 ### Rails 8 Conventions
 
